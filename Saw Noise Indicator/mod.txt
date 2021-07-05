@@ -1,0 +1,35 @@
+{
+	"blt_version"  :  2,
+	"name"  :  "Saw Noise Indicator",
+	"description"  :  "",
+	"author"  :  "KXSAVS3CH",
+	"color" : "171 39 79",
+	"contact"  :  "\n https://modworkshop.net/user/74917 \n https://steamcommunity.com/id/kosavsechindabuilding/",
+	"version" : "1.0",
+	"hooks" : [
+		{
+			"hook_id" : "lib/managers/menumanager",
+			"script_path" : "lua/menumanager.lua"
+		},
+		{
+			"hook_id" : "lib/units/weapons/raycastweaponbase",
+			"script_path" : "lua/main.lua"
+		},
+		{
+			"hook_id" : "lib/managers/hudmanager",
+			"script_path" : "lua/main.lua"
+		},
+		{
+			"hook_id" : "lib/managers/playermanager",
+			"script_path" : "lua/main.lua"
+		},
+	],
+	"updates" : [
+		{
+			"identifier" : "pd2_Saw_Noise_Indicator",
+			"host": {
+			"meta": "https://github.com/kosavsech/PD2_Saw_Noise_Indicator-master/releases/download/refs%2Fheads%2Fmaster/meta.json"
+			}
+		}
+	]
+}

@@ -1,0 +1,25 @@
+{
+	"Saw_Noise_Indicator_main_menu_title": "Saw Noise indicator",
+	"Saw_Noise_Indicator_main_menu_desc": "A mod that helps you to saw silently using mechanic of game",
+
+	"Saw_Noise_Indicator_enabled_title": "Enabled",
+	"Saw_Noise_Indicator_enabled_desc": "Toggle of mod",
+
+	"Saw_Noise_Indicator_prediction_value_title": "Safety delay timer",
+	"Saw_Noise_Indicator_prediction_value_desc": "Value of time before saw silence will end",
+
+	"Saw_Noise_Indicator_loud_saw_effect_title": "Separate loud saw effect",
+	"Saw_Noise_Indicator_loud_saw_effect_desc": "If off, will be no effect when saw is loud",
+
+	"Saw_Noise_Indicator_silent_saw_color_title": "Сolor effect of the silent saw",
+	"Saw_Noise_Indicator_silent_saw_color_desc": "Effect with this color will appear when saw is silent",
+
+	"Saw_Noise_Indicator_loud_saw_color_title": "Сolor effect of the loud saw",
+	"Saw_Noise_Indicator_loud_saw_color_desc": "Effect with this color will appear when saw is loud",
+
+	"Saw_Noise_Indicator_silent_saw_color_input_title": "Сolor effect of the silent saw",
+	"Saw_Noise_Indicator_silent_saw_color_input_desc": "Write hex color. Effect with this color will appear when saw is silent",
+	
+	"Saw_Noise_Indicator_loud_saw_color_input_title": "Сolor effect of the loud saw",
+	"Saw_Noise_Indicator_loud_saw_color_input_desc": "Write hex color. Effect with this color will appear when saw is loud"
+}
