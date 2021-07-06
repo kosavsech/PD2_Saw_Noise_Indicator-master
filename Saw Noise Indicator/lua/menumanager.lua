@@ -1,13 +1,14 @@
 _G.Saw_Noise_Indicator = _G.Saw_Noise_Indicator or {}
 Saw_Noise_Indicator._path = ModPath
 Saw_Noise_Indicator.data_path = SavePath .. 'Saw_Noise_Indicator.txt'
+Saw_Noise_Indicator.silent_deadline = 0
 Saw_Noise_Indicator.default_settings = {
 	enabled = true,
-	prediction_value = 0.40,
+	prediction_value = 0.50,
 	loud_saw_effect = true,
 	silent_saw_color = "7FFF00",
 	loud_saw_color = "8B0000",
-	palettes = { --for colorpicker
+	palettes = { --for ColorPicker
 		"ADFF2F",
 		"7FFF00",
 		"7CFC00",
@@ -35,7 +36,6 @@ Saw_Noise_Indicator.default_settings = {
 		"8B0000"
 	}
 }
-Saw_Noise_Indicator.silent_deadline = 0
 Saw_Noise_Indicator.settings = table.deep_map_copy(Saw_Noise_Indicator.default_settings)
 
 function Saw_Noise_Indicator:set_colorpicker_menu(menu)
@@ -77,7 +77,7 @@ function Saw_Noise_Indicator:log(a,...)
 		return
 	end
 	if Console then
-		return Console:log(a,...)
+		return Console:Log(a,...)
 	else
 		return log("[Saw_Noise_Indicator] " .. tostring(a))
 	end
@@ -99,6 +99,12 @@ function Saw_Noise_Indicator:Load()
 		end
 	else
 		self:Save()
+	end
+end
+
+function Saw_Noise_Indicator:LoadTextures()
+	for _, file in pairs(file.GetFiles(Saw_Noise_Indicator._path.. "assets/guis/textures/")) do
+		DB:create_entry(Idstring("texture"), Idstring("assets/guis/textures/".. file:gsub(".texture", "")), Saw_Noise_Indicator._path.. "assets/guis/textures/".. file)
 	end
 end
 
@@ -187,7 +193,7 @@ end)
 
 Hooks:Add("MenuManagerPopulateCustomMenus", "Base_PopulateCustomMenus_Json_Saw_Noise_Indicator_main_menu", function(menu_manager, nodes)
 	MenuHelper:AddToggle({
-		id = "Saw_Noise_Indicator_enabled",
+		id = "enabled",
 		title = "Saw_Noise_Indicator_enabled_title",
 		desc = "Saw_Noise_Indicator_enabled_desc",
 		callback = "Saw_Noise_Indicator_toggle",
@@ -202,7 +208,7 @@ Hooks:Add("MenuManagerPopulateCustomMenus", "Base_PopulateCustomMenus_Json_Saw_N
 		priority = 5
 	})
 	MenuHelper:AddSlider({
-		id = "prediction_value_slider",
+		id = "prediction_value",
 		title = "Saw_Noise_Indicator_prediction_value_title",
 		desc = "Saw_Noise_Indicator_prediction_value_desc",
 		callback = "Saw_Noise_Indicator_value",
@@ -215,7 +221,7 @@ Hooks:Add("MenuManagerPopulateCustomMenus", "Base_PopulateCustomMenus_Json_Saw_N
 		priority = 4
 	})
 	MenuHelper:AddToggle({
-		id = "Saw_Noise_Indicator_loud_saw_effect_toggle",
+		id = "loud_saw_effect",
 		title = "Saw_Noise_Indicator_loud_saw_effect_title",
 		desc = "Saw_Noise_Indicator_loud_saw_effect_desc",
 		callback = "Saw_Noise_Indicator_toggle",
@@ -242,22 +248,24 @@ Hooks:Add("MenuManagerPopulateCustomMenus", "Base_PopulateCustomMenus_Json_Saw_N
 		})
 	elseif not _G.ColorPicker then
 		MenuHelper:AddInput({
-			id = "Saw_Noise_Indicator_silent_saw_color_input",
+			id = "silent_saw_color",
 			title = "Saw_Noise_Indicator_silent_saw_color_input_title",
 			desc = "Saw_Noise_Indicator_silent_saw_color_input_desc",
 			callback = "Saw_Noise_Indicator_value",
 			value = Saw_Noise_Indicator.settings.silent_saw_color,
-			menu_id = "Main_Menu_Elements_Manager_mod_main_menu",
+			menu_id = "Saw_Noise_Indicator_main_menu",
 			priority = 3
 		})
 		MenuHelper:AddInput({
-			id = "Saw_Noise_Indicator_loud_saw_color_input",
+			id = "loud_saw_color",
 			title = "Saw_Noise_Indicator_loud_saw_color_input_title",
 			desc = "Saw_Noise_Indicator_loud_saw_color_input_desc",
 			callback = "Saw_Noise_Indicator_value",
 			value = Saw_Noise_Indicator.settings.loud_saw_color,
-			menu_id = "Main_Menu_Elements_Manager_mod_main_menu",
+			menu_id = "Saw_Noise_Indicator_main_menu",
 			priority = 1
 		})
 	end
 end)
+
+Saw_Noise_Indicator:LoadTextures()

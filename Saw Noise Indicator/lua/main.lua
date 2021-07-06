@@ -35,7 +35,7 @@ function Saw_Noise_Indicator:ScreenEffectSetup()
 		local Saw_Noise_Indicator_effect = hud.panel:bitmap({
 			name = "Saw_Noise_Indicator_effect",
 			visible = false,
-			texture = "assets/guis/textures/custom_effect",
+			texture = "assets/guis/textures/saw_indicator_effect",
 			layer = 0,
 			blend_mode = "add",
 			w = hud.panel:w(),
@@ -52,6 +52,7 @@ Hooks:PostHook(RaycastWeaponBase, "_check_alert", "Saw_Noise_Indicator_RaycastWe
 	end
 	local equipped_saw = Saw_Noise_Indicator:CurrentWeaponID() == "saw" or Saw_Noise_Indicator:CurrentWeaponID() == "saw_secondary"
 	if equipped_saw then
+		Saw_Noise_Indicator:log( self._alert_size,{color = Color.blue} )
 		if self._alert_size == 200 then
 			Saw_Noise_Indicator.silent_deadline = TimerManager:game():time() + 1.5
 		end
@@ -62,12 +63,15 @@ Hooks:PostHook(HUDManager, "update", "Saw_Noise_Indicator_HUDManager_update", fu
 	if not Saw_Noise_Indicator:IsEnabled() then
 		return
 	end
-	local equipped_saw = Saw_Noise_Indicator:CurrentWeaponID() == "saw" or Saw_Noise_Indicator:CurrentWeaponID() == "saw_secondary"
+
 	Saw_Noise_Indicator:ScreenEffectSetup()
-	local hud = managers.hud:script( PlayerBase.PLAYER_INFO_HUD_FULLSCREEN_PD2)
-	local Saw_Noise_Indicator_effect = hud.panel:child("Saw_Noise_Indicator_effect") 
+	local hud = managers.hud:script( PlayerBase.PLAYER_INFO_HUD_FULLSCREEN_PD2 )
+	local Saw_Noise_Indicator_effect = hud.panel:child("Saw_Noise_Indicator_effect")
+
+	local equipped_saw = Saw_Noise_Indicator:CurrentWeaponID() == "saw" or Saw_Noise_Indicator:CurrentWeaponID() == "saw_secondary"
 	if equipped_saw then
 		if round( Saw_Noise_Indicator.silent_deadline - t, 0.01 ) > Saw_Noise_Indicator.settings.prediction_value then
+			Saw_Noise_Indicator:log( round( Saw_Noise_Indicator.silent_deadline - t, 0.01 ) .. " > " .. Saw_Noise_Indicator.settings.prediction_value, {color = Color.blue} )
 			Saw_Noise_Indicator:ScreenEffectApplier(Saw_Noise_Indicator_effect, "silent")
 		else
 			if Saw_Noise_Indicator.settings.loud_saw_effect then
